@@ -1,0 +1,187 @@
+{
+  // General Settings
+  "layer": "top",
+  // Modules Left
+  "modules-left": ["clock"],
+  // Modules Center
+  "modules-center": [],
+
+  // Modules Right
+  "modules-right": [
+    "bluetooth",
+    "pulseaudio",
+    "network",
+    "backlight",
+    "group/tools",
+    "battery",
+    "custom/notifications"
+  ],
+
+  // Tools
+  "custom/tools": {
+    "format": "",
+    "tooltip-format": "Tools",
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
+  },
+
+  // Cliphist
+  "custom/cliphist": {
+    "format": "",
+    "on-click": "sleep 0.1 && bash ~/.config/waybar/scripts/cliphist.sh",
+    "on-click-right": "sleep 0.1 && bash ~/.config/waybar/scripts/cliphist.sh d",
+    "on-click-middle": "sleep 0.1 && bash ~/.config/waybar/scripts/cliphist.sh w",
+    "tooltip-format": "Left: Open clipboard Manager\nRight: Delete an entry\nMiddle: Clear list",
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
+  },
+
+  // // Hypridle inhibitor
+  "custom/hypridle": {
+    "format": "{text}",
+    "return-type": "json",
+    "escape": true,
+    "exec-on-event": true,
+    "interval": 10,
+    "exec": "bash ~/.config/waybar/scripts/hyprlock.sh status",
+    "on-click": "bash ~/.config/waybar/scripts/hyprlock.sh toggle",
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
+  },
+
+  // SwayNC
+  "custom/notifications": {
+    "format": "",
+    "tooltip-format": "",
+    "tooltip": "Notifications",
+    "on-click": "swaync-client -t"
+  },
+
+  // Clock
+  "clock": {
+    "format": "{:%I:%M %p}",
+    "tooltip": false
+  },
+  // System
+  "custom/system": {
+    "format": "",
+    "tooltip": false,
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
+  },
+
+  // Group Tools
+  "group/tools": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "not-memory",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/tools",
+      "custom/cliphist",
+      "custom/hypridle",
+      "power-profiles-daemon"
+    ]
+  },
+
+  // Group Settings
+  "group/settings": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "not-memory",
+      "transition-left-to-right": true
+    },
+    "modules": ["custom/settings", "custom/waybarthemes", "custom/wallpaper"]
+  },
+
+  // Network
+  "network": {
+    "format": "{ifname}",
+    "format-wifi": "",
+    "format-ethernet": "󰈀  {ifname}",
+    "format-disconnected": "󰤭",
+    "tooltip-format": " {ifname} via {gwaddri}",
+    "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+    "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+    "tooltip-format-disconnected": "Offline",
+    "max-length": 50,
+    "on-click": "bash ~/.config/waybar/scripts/networkmanager.sh"
+    // "on-click-right": "bash ~/.config/waybar/scripts/nm-applet.sh toggle"
+  },
+
+  // Battery
+  "battery": {
+    "interval": 1,
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": "  {capacity}%",
+    // "format-alt": "{icon}  {time}",
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+  },
+
+  // Pulseaudio
+  "pulseaudio": {
+    "scroll-step": 1, // %, can be a float
+    "format": "{icon}  {volume}%",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": " ",
+      "hands-free": "󰍰 ",
+      "headset": " ",
+      "phone": " ",
+      "portable": " ",
+      "car": " ",
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol"
+  },
+
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "",
+    "format-off": "",
+    "interval": 30,
+    "on-click": "bash ~/.config/waybar/scripts/bluetooth.sh",
+    "tooltip-format-connected": "Connected devices: {num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t| Battery life: {device_battery_percentage}%",
+    "format-no-controller": ""
+  },
+
+  // backlight:
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "scroll-step": 1
+  }
+}

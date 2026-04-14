@@ -1,0 +1,211 @@
+{
+  // General Settings
+  "layer": "top",
+  //"mode": "dock",
+  "exclusive": true,
+  "passthrough": false,
+  "position": "top",
+  "spacing": 3,
+  "fixed-center": true,
+  "ipc": true,
+  "margin-top": 3,
+  "margin-left": 8,
+  "margin-right": 8,
+  "margin-bottom": -6,
+
+  // Modules Left
+  "modules-left": ["custom/logo", "clock"],
+  // Modules Center
+  "modules-center": ["hyprland/workspaces"],
+
+  // Modules Right
+  "modules-right": [
+    "bluetooth",
+    "pulseaudio",
+    "network",
+    "backlight",
+    "group/tools",
+    "battery",
+    "custom/swaync"
+  ],
+
+  "hyprland/workspaces": {
+    "active-only": false,
+    "all-outputs": true,
+    "format": "{icon}",
+    "show-special": false,
+    "on-click": "activate",
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": []
+    },
+    "format-icons": {
+      "active": "",
+      "default": ""
+    }
+  },
+
+  // Ubunto
+
+  // Tools
+  "custom/tools": {
+    "format": "",
+    "tooltip-format": "Tools",
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
+  },
+
+  // Cliphist
+  "custom/cliphist": {
+    "format": "",
+    "on-click": "sleep 0.1 && bash ~/.config/waybar/scripts/cliphist.sh",
+    "on-click-right": "sleep 0.1 && bash ~/.config/waybar/scripts/cliphist.sh d",
+    "on-click-middle": "sleep 0.1 && bash ~/.config/waybar/scripts/cliphist.sh w",
+    "tooltip-format": "Left: Open clipboard Manager\nRight: Delete an entry\nMiddle: Clear list",
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
+  },
+
+  // // Hypridle inhibitor
+  "custom/hypridle": {
+    "format": "{text}",
+    "return-type": "json",
+    "escape": true,
+    "exec-on-event": true,
+    "interval": 10,
+    "exec": "bash ~/.config/waybar/scripts/hyprlock.sh status",
+    "on-click": "bash ~/.config/waybar/scripts/hyprlock.sh toggle",
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
+  },
+
+  // custom logo
+  "custom/logo": {
+    "format": "",
+    "tooltip": "Ubuntu",
+    "on-click": "rofi -show drun -theme ~/.config/rofi/launchers/type-7/style-7.rasi"
+  },
+
+  // SwayNC
+  "custom/swaync": {
+    "format": "",
+    "tooltip-format": "",
+    "tooltip": "Notifications",
+    "on-click": "swaync-client -t"
+  },
+
+  // Clock
+  "clock": {
+    "interval": 1,
+    //"format": " {:%I:%M %p}", // AM PM format
+    "format": "  {:%I:%M %p}",
+    "format-alt": "  {:%I:%M    %Y, %d %B, %A}"
+  },
+  // System
+  "custom/system": {
+    "format": "",
+    "tooltip": false,
+    "on-scroll-up": "true",
+    "on-scroll-down": "true"
+  },
+
+  // Group Tools
+  "group/tools": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "not-memory",
+      "transition-left-to-right": false
+    },
+    "modules": ["custom/tools", "custom/cliphist", "custom/hypridle"]
+  },
+
+  // Network
+  "network": {
+    "format": "{ifname}",
+    "format-wifi": "",
+    "format-ethernet": "󰈀  {ifname}",
+    "format-disconnected": "󰤭",
+    "tooltip-format": " {ifname} via {gwaddri}",
+    "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+    "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+    "tooltip-format-disconnected": "Offline",
+    "max-length": 50
+  },
+
+  // Battery
+  "battery": {
+    "interval": 1,
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": "  {capacity}%",
+    // "format-alt": "{icon}  {time}",
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+  },
+
+  // Pulseaudio
+  "pulseaudio": {
+    "scroll-step": 1, // %, can be a float
+    "format": "{icon}   {volume}%",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": " ",
+      "hands-free": "󰍰 ",
+      "headset": " ",
+      "phone": " ",
+      "portable": " ",
+      "car": " ",
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol"
+  },
+
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "",
+    "format-off": "",
+    "interval": 30,
+    // "on-click": "bash ~/.config/waybar/scripts/bluetooth.sh",
+    "tooltip-format-connected": "Connected devices: {num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t| Battery life: {device_battery_percentage}%",
+    "format-no-controller": ""
+  },
+
+  // backlight:
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "scroll-step": 1
+  }
+}
