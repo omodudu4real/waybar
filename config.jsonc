@@ -64,7 +64,7 @@
     "on-click": "sleep 0.1 && bash ~/.config/waybar/scripts/cliphist.sh",
     "on-click-right": "sleep 0.1 && bash ~/.config/waybar/scripts/cliphist.sh d",
     "on-click-middle": "sleep 0.1 && bash ~/.config/waybar/scripts/cliphist.sh w",
-    "tooltip-format": "Left: Open clipboard Manager\nRight: Delete an entry\nMiddle: Clear list",
+    "tooltip-format": "",
     "on-scroll-up": "true",
     "on-scroll-down": "true"
   },
@@ -85,7 +85,7 @@
   // custom logo
   "custom/logo": {
     "format": "",
-    "tooltip": "Ubuntu",
+    "tooltip": "",
     "on-click": "rofi -show drun -theme ~/.config/rofi/launchers/type-7/style-7.rasi"
   },
 
@@ -102,6 +102,7 @@
     "interval": 1,
     //"format": " {:%I:%M %p}", // AM PM format
     "format": "  {:%I:%M %p}",
+    // "tooltip-format": "",
     "format-alt": "  {:%I:%M    %Y, %d %B, %A}"
   },
   // System
@@ -188,7 +189,7 @@
 
   // backlight:
   "backlight": {
-    "format": "{icon} {percent}%",
+    "format": "{icon}  {percent}%",
     "format-icons": [
       "",
       "",

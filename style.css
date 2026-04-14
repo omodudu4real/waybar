@@ -94,9 +94,6 @@ window#waybar.hidden {
 #custom-swaync,
 #custom-updater,
 #custom-weather,
-#custom-tools,
-#custom-cliphist,
-#custom-hypridle,
 #custom-weather.clearNight,
 #custom-weather.cloudyFoggyDay,
 #custom-weather.cloudyFoggyNight,
@@ -107,6 +104,27 @@ window#waybar.hidden {
 #custom-weather.showyIcyDay,
 #custom-weather.snowyIcyNight,
 #custom-weather.sunnyDay {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 6px;
+  padding-left: 6px;
+}
+
+#custom-tools {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 4px;
+  padding-left: 0px;
+}
+
+#custom-cliphist {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 6px;
+  padding-left: 6px;
+}
+
+#custom-hypridle {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-right: 6px;
@@ -124,7 +142,6 @@ window#waybar.hidden {
   border-radius: 10px;
   margin-left: 4px;
 }
-
 #custom-swaync {
   color: @primary;
 }
@@ -168,7 +185,7 @@ window#waybar.hidden {
   padding-right: 10px;
   padding-left: 10px;
   border-radius: 10px;
-  margin-left: 10px;
+  margin-left: 6px;
 }
 
 #custom-cliphist {
