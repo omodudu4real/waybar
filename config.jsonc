@@ -26,7 +26,7 @@
     "backlight",
     "group/tools",
     "battery",
-    "custom/swaync"
+    "custom/swaync",
   ],
 
   "hyprland/workspaces": {
@@ -40,12 +40,12 @@
       "2": [],
       "3": [],
       "4": [],
-      "5": []
+      "5": [],
     },
     "format-icons": {
       "active": "",
-      "default": ""
-    }
+      "default": "",
+    },
   },
 
   // Ubunto
@@ -55,18 +55,18 @@
     "format": "",
     "tooltip-format": "Tools",
     "on-scroll-up": "true",
-    "on-scroll-down": "true"
+    "on-scroll-down": "true",
   },
 
   // Cliphist
   "custom/cliphist": {
     "format": "",
-    "on-click": "sleep 0.1 && bash ~/.config/waybar/scripts/cliphist.sh",
-    "on-click-right": "sleep 0.1 && bash ~/.config/waybar/scripts/cliphist.sh d",
-    "on-click-middle": "sleep 0.1 && bash ~/.config/waybar/scripts/cliphist.sh w",
+    "on-click": "sleep 0.1 && bash ~/.config/waybar/scripts/clipManager.sh",
+    "on-click-right": "sleep 0.1 && bash ~/.config/waybar/scripts/clipManager.sh d",
+    "on-click-middle": "sleep 0.1 && bash ~/.config/waybar/scripts/clipManager.sh w",
     "tooltip-format": "",
     "on-scroll-up": "true",
-    "on-scroll-down": "true"
+    "on-scroll-down": "true",
   },
 
   // // Hypridle inhibitor
@@ -79,14 +79,14 @@
     "exec": "bash ~/.config/waybar/scripts/hyprlock.sh status",
     "on-click": "bash ~/.config/waybar/scripts/hyprlock.sh toggle",
     "on-scroll-up": "true",
-    "on-scroll-down": "true"
+    "on-scroll-down": "true",
   },
 
   // custom logo
   "custom/logo": {
     "format": "",
     "tooltip": "",
-    "on-click": "rofi -show drun -theme ~/.config/rofi/launchers/type-7/style-7.rasi"
+    "on-click": "rofi -show drun -theme ~/.config/rofi/launchers/type-7/style-7.rasi",
   },
 
   // SwayNC
@@ -94,7 +94,7 @@
     "format": "",
     "tooltip-format": "",
     "tooltip": "Notifications",
-    "on-click": "swaync-client -t"
+    "on-click": "swaync-client -t",
   },
 
   // Clock
@@ -103,14 +103,14 @@
     //"format": " {:%I:%M %p}", // AM PM format
     "format": "  {:%I:%M %p}",
     // "tooltip-format": "",
-    "format-alt": "  {:%I:%M    %Y, %d %B, %A}"
+    "format-alt": "  {:%I:%M    %Y, %d %B, %A}",
   },
   // System
   "custom/system": {
     "format": "",
     "tooltip": false,
     "on-scroll-up": "true",
-    "on-scroll-down": "true"
+    "on-scroll-down": "true",
   },
 
   // Group Tools
@@ -119,9 +119,9 @@
     "drawer": {
       "transition-duration": 300,
       "children-class": "not-memory",
-      "transition-left-to-right": false
+      "transition-left-to-right": false,
     },
-    "modules": ["custom/tools", "custom/cliphist", "custom/hypridle"]
+    "modules": ["custom/tools", "custom/cliphist", "custom/hypridle"],
   },
 
   // Network
@@ -134,7 +134,7 @@
     "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
     "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
     "tooltip-format-disconnected": "Offline",
-    "max-length": 50
+    "max-length": 50,
   },
 
   // Battery
@@ -143,7 +143,6 @@
     "states": {
       "good": 95,
       "warning": 30,
-      "critical": 15
     },
     "format": "{icon} {capacity}%",
     "format-charging": " {capacity}%",
@@ -151,7 +150,7 @@
     // "format-alt": "{icon}  {time}",
     // "format-good": "", // An empty format will hide the module
     // "format-full": "",
-    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
   },
 
   // Pulseaudio
@@ -170,9 +169,9 @@
       "phone": " ",
       "portable": " ",
       "car": " ",
-      "default": ["", "", ""]
+      "default": ["", "", ""],
     },
-    "on-click": "pavucontrol"
+    "on-click": "pavucontrol",
   },
 
   "bluetooth": {
@@ -184,7 +183,7 @@
     "tooltip-format-connected": "Connected devices: {num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t| Battery life: {device_battery_percentage}%",
-    "format-no-controller": ""
+    "format-no-controller": "",
   },
 
   // backlight:
@@ -205,8 +204,8 @@
       "",
       "",
       "",
-      ""
+      "",
     ],
-    "scroll-step": 1
-  }
+    "scroll-step": 1,
+  },
 }

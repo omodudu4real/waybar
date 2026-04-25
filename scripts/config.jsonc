@@ -14,7 +14,7 @@
     "backlight",
     "group/tools",
     "battery",
-    "custom/notifications"
+    "custom/notifications",
   ],
 
   // Tools
@@ -22,18 +22,15 @@
     "format": "",
     "tooltip-format": "Tools",
     "on-scroll-up": "true",
-    "on-scroll-down": "true"
+    "on-scroll-down": "true",
   },
 
   // Cliphist
   "custom/cliphist": {
     "format": "",
-    "on-click": "sleep 0.1 && bash ~/.config/waybar/scripts/cliphist.sh",
-    "on-click-right": "sleep 0.1 && bash ~/.config/waybar/scripts/cliphist.sh d",
-    "on-click-middle": "sleep 0.1 && bash ~/.config/waybar/scripts/cliphist.sh w",
-    "tooltip-format": "Left: Open clipboard Manager\nRight: Delete an entry\nMiddle: Clear list",
+    "on-click": "sleep 0.1 && bash ~/.config/waybar/scripts/clipManager.sh",
     "on-scroll-up": "true",
-    "on-scroll-down": "true"
+    "on-scroll-down": "true",
   },
 
   // // Hypridle inhibitor
@@ -46,7 +43,7 @@
     "exec": "bash ~/.config/waybar/scripts/hyprlock.sh status",
     "on-click": "bash ~/.config/waybar/scripts/hyprlock.sh toggle",
     "on-scroll-up": "true",
-    "on-scroll-down": "true"
+    "on-scroll-down": "true",
   },
 
   // SwayNC
@@ -54,20 +51,20 @@
     "format": "",
     "tooltip-format": "",
     "tooltip": "Notifications",
-    "on-click": "swaync-client -t"
+    "on-click": "swaync-client -t",
   },
 
   // Clock
   "clock": {
     "format": "{:%I:%M %p}",
-    "tooltip": false
+    "tooltip": false,
   },
   // System
   "custom/system": {
     "format": "",
     "tooltip": false,
     "on-scroll-up": "true",
-    "on-scroll-down": "true"
+    "on-scroll-down": "true",
   },
 
   // Group Tools
@@ -76,14 +73,14 @@
     "drawer": {
       "transition-duration": 300,
       "children-class": "not-memory",
-      "transition-left-to-right": false
+      "transition-left-to-right": false,
     },
     "modules": [
       "custom/tools",
       "custom/cliphist",
       "custom/hypridle",
-      "power-profiles-daemon"
-    ]
+      "power-profiles-daemon",
+    ],
   },
 
   // Group Settings
@@ -92,9 +89,9 @@
     "drawer": {
       "transition-duration": 300,
       "children-class": "not-memory",
-      "transition-left-to-right": true
+      "transition-left-to-right": true,
     },
-    "modules": ["custom/settings", "custom/waybarthemes", "custom/wallpaper"]
+    "modules": ["custom/settings", "custom/waybarthemes", "custom/wallpaper"],
   },
 
   // Network
@@ -108,7 +105,7 @@
     "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
     "tooltip-format-disconnected": "Offline",
     "max-length": 50,
-    "on-click": "bash ~/.config/waybar/scripts/networkmanager.sh"
+    "on-click": "bash ~/.config/waybar/scripts/networkmanager.sh",
     // "on-click-right": "bash ~/.config/waybar/scripts/nm-applet.sh toggle"
   },
 
@@ -118,7 +115,7 @@
     "states": {
       "good": 95,
       "warning": 30,
-      "critical": 15
+      "critical": 15,
     },
     "format": "{icon} {capacity}%",
     "format-charging": " {capacity}%",
@@ -126,7 +123,7 @@
     // "format-alt": "{icon}  {time}",
     // "format-good": "", // An empty format will hide the module
     // "format-full": "",
-    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
   },
 
   // Pulseaudio
@@ -145,9 +142,9 @@
       "phone": " ",
       "portable": " ",
       "car": " ",
-      "default": ["", "", ""]
+      "default": ["", "", ""],
     },
-    "on-click": "pavucontrol"
+    "on-click": "pavucontrol",
   },
 
   "bluetooth": {
@@ -159,7 +156,7 @@
     "tooltip-format-connected": "Connected devices: {num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t| Battery life: {device_battery_percentage}%",
-    "format-no-controller": ""
+    "format-no-controller": "",
   },
 
   // backlight:
@@ -180,8 +177,8 @@
       "",
       "",
       "",
-      ""
+      "",
     ],
-    "scroll-step": 1
-  }
+    "scroll-step": 1,
+  },
 }
