@@ -117,18 +117,15 @@ window#waybar.hidden {
   padding-left: 0px;
 }
 
-#custom-cliphist {
+#custom-cliphist,
+#custom-hypridle,
+#custom-hyprpicker,
+#custom-hyprshot {
+  color: @primary;
   padding-top: 3px;
   padding-bottom: 3px;
-  padding-right: 6px;
-  padding-left: 6px;
-}
-
-#custom-hypridle {
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-right: 6px;
-  padding-left: 6px;
+  padding-right: 15px;
+  padding-left: 1px;
 }
 
 #custom-logo {

@@ -1,121 +1,119 @@
 #!/usr/bin/env bash
-## /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
-# This script for selecting wallpapers (SUPER W)
 
-# Wallpapers Path
+iDIR="$HOME/.config/swaync/icons"
+
 wallpaperDir="$HOME/Pictures/wallpapers"
 themesDir="$HOME/.config/rofi/themes"
+cacheDir="$HOME/.cache/wallpaper-menu"
+randomPreview="$cacheDir/random-preview.png"
 
-# Transition config
 FPS=60
 TYPE="any"
 DURATION=3
 BEZIER="0.4,0.2,0.4,1.0"
 SWWW_PARAMS="--transition-fps ${FPS} --transition-type ${TYPE} --transition-duration ${DURATION} --transition-bezier ${BEZIER}"
 
-# Check if swaybg is running
-if pidof swaybg > /dev/null; then
-  pkill swaybg
+mapfile -t PICS < <(find -L "$wallpaperDir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) | sort)
+
+if [ "${#PICS[@]}" -eq 0 ]; then
+  notify-send "Wallpaper" "No wallpapers found"
+  exit 1
 fi
 
-# Retrieve image files as a list
-PICS=($(find -L "${wallpaperDir}" -type f \( -iname \*.jpg -o -iname \*.jpeg -o -iname \*.png -o -iname \*.gif \) | sort ))
-
-# Use date variable to increase randomness
-randomNumber=$(( ($(date +%s) + RANDOM) + $$ ))
+randomNumber=$(( $(date +%s) + RANDOM + $$ ))
 randomPicture="${PICS[$(( randomNumber % ${#PICS[@]} ))]}"
-randomChoice="[${#PICS[@]}] Random"
+randomChoice="Random"
 
-# Rofi command
 rofiCommand="rofi -show -dmenu -theme ${themesDir}/wallpaper-select.rasi"
 
-# Execute command according the wallpaper manager
-executeCommand() {
+generateRandomPreview() {
+  mkdir -p "$cacheDir"
 
-  if command -v swww &>/dev/null; then
-    swww img "$1" ${SWWW_PARAMS}
+  mapfile -t previewFiles < <(find -L "$wallpaperDir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | shuf -n 5)
 
-  elif command -v swaybg &>/dev/null; then
-    swaybg -i "$1" &
-
-  else
-    echo "Neither swww nor swaybg are installed."
-    exit 1
+  if [ "${#previewFiles[@]}" -lt 5 ]; then
+    cp "$iDIR/picture.png" "$randomPreview" 2>/dev/null
+    return
   fi
 
-  ln -sf "$1" "$HOME/.current_wallpaper"
+  convert -size 320x220 xc:none \
+    \( "${previewFiles[0]}" -resize 150x95^ -gravity center -extent 150x95 -background none -rotate -10 \) -gravity center -geometry -70-20 -composite \
+    \( "${previewFiles[1]}" -resize 150x95^ -gravity center -extent 150x95 -background none -rotate 8 \) -gravity center -geometry +0-35 -composite \
+    \( "${previewFiles[2]}" -resize 150x95^ -gravity center -extent 150x95 -background none -rotate -6 \) -gravity center -geometry +65+0 -composite \
+    \( "${previewFiles[3]}" -resize 150x95^ -gravity center -extent 150x95 -background none -rotate 12 \) -gravity center -geometry -45+45 -composite \
+    \( "${previewFiles[4]}" -resize 150x95^ -gravity center -extent 150x95 -background none -rotate -8 \) -gravity center -geometry +45+55 -composite \
+    "$randomPreview"
 }
 
-# Show the images
-menu() {
+executeCommand() {
+  wallpaper="$1"
+  wallpaperName="$(basename "$wallpaper")"
+  wallpaperName="${wallpaperName%.*}"
 
-  printf "$randomChoice\n"
+  if command -v swww &>/dev/null; then
+    swww img "$wallpaper" ${SWWW_PARAMS}
+    matugen image "$wallpaper" --source-color-index 0
+
+    notify-send \
+      -e \
+      -h string:x-canonical-private-synchronous:wallpaper_notif \
+      -h int:value:0 \
+      -u low \
+      -i "$iDIR/picture.png" \
+      "Wallpaper changed" "$wallpaperName"
+  fi
+}
+
+menu() {
+  printf "%s\x00icon\x1f%s\n" "$randomChoice" "$randomPreview"
 
   for i in "${!PICS[@]}"; do
-
-    # If not *.gif, display
-    if [[ -z $(echo "${PICS[$i]}" | grep .gif$) ]]; then
-      printf "$(basename "${PICS[$i]}" | cut -d. -f1)\x00icon\x1f${PICS[$i]}\n"
+    if [[ ! "${PICS[$i]}" =~ \.gif$ ]]; then
+      name="$(basename "${PICS[$i]}")"
+      name="${name%.*}"
+      printf "%s\x00icon\x1f%s\n" "$name" "${PICS[$i]}"
     else
-    # Displaying .gif to indicate animated images
-      printf "$(basename "${PICS[$i]}")\n"
+      printf "%s\n" "$(basename "${PICS[$i]}")"
     fi
   done
 }
 
-# If swww exists, start it
 if command -v swww &>/dev/null; then
-  swww query || swww init
+  swww query >/dev/null 2>&1 || swww init
 fi
 
-# Execution
 main() {
+  generateRandomPreview
+
   choice=$(menu | ${rofiCommand})
 
-  # No choice case
-  if [[ -z $choice ]]; then
+  if [[ -z "$choice" ]]; then
     exit 0
   fi
 
-  # Random choice case
-  if [ "$choice" = "$randomChoice" ]; then
-    executeCommand "${randomPicture}"
-    return 0
+  if [[ "$choice" = "$randomChoice" ]]; then
+    executeCommand "$randomPicture"
+    exit 0
   fi
 
-  # Find the selected file
+  selectedFile=""
+
   for file in "${PICS[@]}"; do
-  # Getting the file
-    if [[ "$(basename "$file" | cut -d. -f1)" = "$choice" ]]; then
+    name="$(basename "$file")"
+    name="${name%.*}"
+
+    if [[ "$name" = "$choice" || "$(basename "$file")" = "$choice" ]]; then
       selectedFile="$file"
       break
     fi
   done
 
-  # Check the file and execute
   if [[ -n "$selectedFile" ]]; then
-    executeCommand "${selectedFile}"
-    return 0
+    executeCommand "$selectedFile"
   else
-    echo "Image not found."
+    notify-send "Wallpaper" "Image not found"
     exit 1
   fi
-
 }
 
-# Check if rofi is already running
-if pidof rofi > /dev/null; then
-  pkill rofi
-  exit 0
-fi
-
 main
-
-
-
-
-
-
-
-
-

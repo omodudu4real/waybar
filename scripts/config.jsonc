@@ -152,7 +152,7 @@
     "format-disabled": "",
     "format-off": "",
     "interval": 30,
-    "on-click": "bash ~/.config/waybar/scripts/bluetooth.sh",
+    "on-click": "bash -lc '$HOME/.nix-profile/bin/overskride'",
     "tooltip-format-connected": "Connected devices: {num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t| Battery life: {device_battery_percentage}%",

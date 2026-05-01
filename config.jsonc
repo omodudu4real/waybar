@@ -48,7 +48,7 @@
     },
   },
 
-  // Ubunto
+  // Ubuntu
 
   // Tools
   "custom/tools": {
@@ -69,7 +69,7 @@
     "on-scroll-down": "true",
   },
 
-  // // Hypridle inhibitor
+  // Hypridle inhibitor
   "custom/hypridle": {
     "format": "{text}",
     "return-type": "json",
@@ -78,6 +78,28 @@
     "interval": 10,
     "exec": "bash ~/.config/waybar/scripts/hyprlock.sh status",
     "on-click": "bash ~/.config/waybar/scripts/hyprlock.sh toggle",
+    "on-scroll-up": "true",
+    "on-scroll-down": "true",
+  },
+
+  // Hyprpicker
+  "custom/hyprpicker": {
+    "format": "",
+    "tooltip": true,
+    "tooltip-format": "Pick color",
+    "on-click": "bash -lc 'hyprpicker -a'",
+    "on-scroll-up": "true",
+    "on-scroll-down": "true",
+  },
+
+  // Hyprshot
+  "custom/hyprshot": {
+    "format": "",
+    "tooltip": true,
+    "tooltip-format": "Screenshot",
+    "on-click": "bash -lc 'hyprshot -m region'",
+    "on-click-right": "bash -lc 'hyprshot -m window'",
+    "on-click-middle": "bash -lc 'hyprshot -m output'",
     "on-scroll-up": "true",
     "on-scroll-down": "true",
   },
@@ -121,7 +143,13 @@
       "children-class": "not-memory",
       "transition-left-to-right": false,
     },
-    "modules": ["custom/tools", "custom/cliphist", "custom/hypridle"],
+    "modules": [
+      "custom/tools",
+      "custom/hyprpicker",
+      "custom/cliphist",
+      "custom/hypridle",
+      "custom/hyprshot",
+    ],
   },
 
   // Network
@@ -130,6 +158,7 @@
     "format-wifi": "",
     "format-ethernet": "󰈀  {ifname}",
     "format-disconnected": "󰤭",
+    "on-click": "bash -lc '$HOME/.config/waybar/scripts/wifi-menu.sh'",
     "tooltip-format": " {ifname} via {gwaddri}",
     "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
     "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
@@ -179,7 +208,7 @@
     "format-disabled": "",
     "format-off": "",
     "interval": 30,
-    // "on-click": "bash ~/.config/waybar/scripts/bluetooth.sh",
+    "on-click": "bash -lc '$HOME/.nix-profile/bin/overskride'",
     "tooltip-format-connected": "Connected devices: {num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t| Battery life: {device_battery_percentage}%",
