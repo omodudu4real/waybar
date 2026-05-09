@@ -126,6 +126,7 @@
     "format": "  {:%I:%M %p}",
     // "tooltip-format": "",
     "format-alt": "  {:%I:%M    %Y, %d %B, %A}",
+    "on-click": "pkill yad || yad --calendar --undecorated --fixed --geometry=320x280+1000+40",
   },
   // System
   "custom/system": {
